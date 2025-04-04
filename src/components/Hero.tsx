@@ -71,7 +71,7 @@ const Hero = () => {
                     <div className="ml-4 text-sm text-gray-400">ContentCraftAI</div>
                   </div>
                   <div className="space-y-4 p-4 rounded-lg bg-black/50">
-                    <p className="text-brand-cyan font-mono text-sm">> Generate TikTok hook for fitness product</p>
+                    <p className="text-brand-cyan font-mono text-sm">{`> Generate TikTok hook for fitness product`}</p>
                     <div className="pl-4 border-l-2 border-brand-purple animate-pulse">
                       <p className="text-gray-300">Creating attention-grabbing hook...</p>
                     </div>
