@@ -12,6 +12,7 @@ import Pricing from "./pages/Pricing";
 import TradingPost from "./pages/TradingPost";
 import TikTok from "./pages/TikTok";
 import CreatorApplication from "./pages/CreatorApplication";
+import Features from "./pages/Features";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/features" element={<Features />} />
           <Route path="/trading-post" element={<TradingPost />} />
           <Route path="/tiktok" element={<TikTok />} />
           <Route path="/creator-application" element={<CreatorApplication />} />
