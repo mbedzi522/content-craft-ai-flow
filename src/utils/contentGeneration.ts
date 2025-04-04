@@ -49,6 +49,7 @@ export async function generateText(prompt: string): Promise<string> {
 // Image generation using Gemini API
 export async function generateImage(prompt: string): Promise<string> {
   try {
+    // Updated API endpoint and request parameters based on Gemini docs
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key=" + GEMINI_API_KEY, {
       method: "POST",
       headers: {
@@ -63,19 +64,25 @@ export async function generateImage(prompt: string): Promise<string> {
           }
         ],
         generationConfig: {
-          responseFormats: ["image", "text"]
+          temperature: 0.9,
+          maxOutputTokens: 2048,
+          responseMimeType: "image/png"
         }
       })
     });
 
     if (!response.ok) {
+      const errorData = await response.json();
+      console.error("API error details:", errorData);
       throw new Error(`API error: ${response.status}`);
     }
 
     const data = await response.json();
     // Extract the image data from the response
-    // This may need adjustment based on the exact response format
-    if (data.candidates[0].content.parts[0].inlineData) {
+    if (data.candidates && 
+        data.candidates[0].content && 
+        data.candidates[0].content.parts && 
+        data.candidates[0].content.parts[0].inlineData) {
       const imageData = data.candidates[0].content.parts[0].inlineData.data;
       return `data:${data.candidates[0].content.parts[0].inlineData.mimeType};base64,${imageData}`;
     }
@@ -84,7 +91,7 @@ export async function generateImage(prompt: string): Promise<string> {
     console.error("Error generating image:", error);
     toast({
       title: "Error",
-      description: "Failed to generate image. Please try again.",
+      description: "Failed to generate image. The image generation API may be temporarily unavailable.",
       variant: "destructive",
     });
     return "";

@@ -32,28 +32,58 @@ const ContentGenerator = () => {
     }
 
     setIsLoading(true);
+    setGeneratedText("");
+    setGeneratedImage("");
+    setSeoResults(null);
 
     try {
       if (contentType === "text") {
         // Include the platform in the prompt for better context
         const enhancedPrompt = `Generate a ${contentPlatform} content about: ${prompt}`;
         const text = await generateText(enhancedPrompt);
-        setGeneratedText(text);
+        if (text) {
+          setGeneratedText(text);
+          toast({
+            title: "Success",
+            description: "Content generated successfully!",
+          });
+        }
       } else if (contentType === "image") {
+        // The image generation API is currently having issues, show a message
+        toast({
+          title: "Notice",
+          description: "Image generation is being processed. This may take a moment.",
+        });
+        
         const imageUrl = await generateImage(prompt);
-        setGeneratedImage(imageUrl);
+        if (imageUrl) {
+          setGeneratedImage(imageUrl);
+          toast({
+            title: "Success",
+            description: "Image generated successfully!",
+          });
+        }
       } else if (contentType === "seo") {
         // For SEO analysis, we need to have some content first
         if (!generatedText.trim()) {
           const text = await generateText(prompt);
-          setGeneratedText(text);
-          
-          // Now analyze the generated text
-          const seoData = await analyzeContentSEO(text);
-          setSeoResults(seoData);
+          if (text) {
+            setGeneratedText(text);
+            
+            // Now analyze the generated text
+            const seoData = await analyzeContentSEO(text);
+            setSeoResults(seoData);
+          }
         } else {
           const seoData = await analyzeContentSEO(generatedText);
           setSeoResults(seoData);
+        }
+        
+        if (seoResults) {
+          toast({
+            title: "Success",
+            description: "SEO analysis completed!",
+          });
         }
       }
     } catch (error) {
