@@ -1,9 +1,9 @@
-
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Music, Zap, UserPlus, Calendar, Hash, TrendingUp, CheckCircle } from 'lucide-react';
+import ContentGenerator from '@/components/ContentGenerator';
 
 const strategies = [
   {
@@ -129,6 +129,7 @@ const TikTok = () => {
                   <Button 
                     size="lg" 
                     className="bg-gradient-to-r from-brand-purple to-brand-cyan text-white hover:opacity-90"
+                    onClick={() => document.getElementById('content-generator')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     Generate TikTok Content
                   </Button>
@@ -152,6 +153,21 @@ const TikTok = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section id="content-generator" className="py-20 bg-gradient-to-b from-transparent to-black/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold">
+                <span className="gradient-text">AI Content Generator</span>
+              </h2>
+              <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                Create engaging TikTok content in seconds with our advanced AI technology
+              </p>
+            </div>
+            
+            <ContentGenerator />
           </div>
         </section>
 
