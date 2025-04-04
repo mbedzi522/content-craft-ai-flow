@@ -51,7 +51,7 @@ const pricingTiers: PricingTier[] = [
       { text: 'Social media captions', included: true },
       { text: 'Blog post generation', included: true },
       { text: 'Plagiarism detection', included: true },
-      { text: 'Brand voice customization', included: true, tooltip: 'Train the AI to match your brand's unique voice and style' },
+      { text: 'Brand voice customization', included: true, tooltip: 'Train the AI to match your brand\'s unique voice and style' },
       { text: 'Priority support', included: true },
       { text: 'Team collaboration (up to 3 seats)', included: true },
       { text: 'Advanced analytics', included: false },
